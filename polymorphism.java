@@ -14,4 +14,12 @@ public class Bicycle implements Movable {
  System.out.println("The bicycle is pedaling.");
  }
 }
-
+public class Main {
+ public static void main(String[] args) {
+ // Using polymorphism with the Movable interface
+ Movable myCar = new Car();
+ Movable myBicycle = new Bicycle();
+ myCar.move(); // Outputs: The car is driving.
+ myBicycle.move(); // Outputs: The bicycle is pedaling.
+ }
+}
