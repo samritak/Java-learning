@@ -22,3 +22,13 @@ public class Car extends Vehicle {
  System.out.println("The car's engine is starting.");
  }
 }
+
+public class Main {
+ public static void main(String[] args) {
+ // Creating an object of the Car class
+ Car myCar = new Car("Toyota");
+ // Using methods from the abstract class and the subclass
+ myCar.displayBrand(); // Outputs: Brand: Toyota
+ myCar.startEngine(); // Outputs: The car's engine is starting.
+ }
+}
