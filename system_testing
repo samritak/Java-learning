@@ -1,0 +1,64 @@
+public class BankAccount {
+ private double balance;
+ public BankAccount(double initialBalance) {
+ this.balance = initialBalance;
+ }
+ public void deposit(double amount) {
+ if (amount > 0) {
+ balance += amount;
+ } else {
+ throw new IllegalArgumentException("Deposit amount must be 
+positive");
+ }
+ }
+ public void withdraw(double amount) {
+ if (amount > 0 && amount <= balance) {
+ balance -= amount;
+ } else if (amount > balance) {
+ throw new IllegalArgumentException("Insufficient funds");
+ } else {
+ throw  IllegalArgumentException("Withdrawal amount must be 
+positive");
+ }
+ }
+ public double getBalance() {
+ return balance;
+ }
+}
+Expanded Unit Tests
+import org.junit.Test;
+import static org.junit.Assert.*;
+public class BankAccountTest {
+ @Test
+ public void testDeposit_IncreasesBalance() {
+ BankAccount account = new BankAccount(100);
+ account.deposit(50);
+ assertEquals(150, account.getBalance(), 0.01);
+ }
+ @Test
+ public void testWithdraw_DecreasesBalance() {
+ BankAccount account = new BankAccount(100);
+ account.withdraw(30);
+ assertEquals(70, account.getBalance(), 0.01);
+@Test(expected = IllegalArgumentException.class)
+ public void testWithdraw_InsufficientFunds_ThrowsException() {
+ BankAccount account = new BankAccount(100);
+ account.withdraw(150);
+ }
+ @Test(expected = IllegalArgumentException.class)
+ public void testDeposit_NegativeAmount_ThrowsException() {
+ BankAccount account = new BankAccount(100);
+ account.deposit(-50);
+ }
+ @Test(expected = IllegalArgumentException.class)
+ public void testWithdraw_NegativeAmount_ThrowsException() {
+ BankAccount account = new BankAccount(100);
+ account.withdraw(-30);
+ }
+@Test
+ public void testGetBalance_ReturnsCorrectBalance() {
+ BankAccount account = new BankAccount(100);
+ assertEquals(100, account.getBalance(), 0.01);
+ }
+}
+
